@@ -1,0 +1,92 @@
+
+📄 Executive Summary
+Our current bi-weekly release cadence enables rapid delivery of new features, but few customers have expressed concerns about the resulting change fatigue. These frequent updates require retraining internal teams and updating documentation, leading to operational overhead and dissatisfaction.
+To address this, we propose a new Slow Release Channel that customers can opt into. This channel provides a more predictable and manageable update schedule, allowing for better internal planning and adoption.
+🔍 Problem Statement
+Some mid-to-large enterprise customers require advance notice and structured rollouts for changes to business-critical workflows. Without this, internal training, documentation, and compliance processes are repeatedly disrupted.
+List of customers who have asked for slow release
+💡 Proposed Solution: Slow Release Channel (Opt-In)
+Customers can opt into a quarterly release cadence where major feature or workflow changes are bundled into two fixed releases:
+Release
+Timing
+Naming Convention
+R1
+Mid-Quarter
+MJJ-R1-2025
+R2
+End of Quarter
+MJJ-R2-2025
+✅ R1 Release: June 15, 2025
+	•	Includes features verified in QA up to two weeks before release.
+	•	Customer Communication: 4 weeks prior
+	◦	"Before vs Upcoming" changelog
+	◦	Help article updates, videos, emails
+	•	Internal Communication: 2 weeks prior to Support, CSM, Sales
+	•	Enablement: Post-release webinar
+✅ R2 Release: July 31, 2025
+	•	Includes remaining features verified in QA up to two weeks before release.
+	•	Customer Communication: 4 weeks prior
+	◦	"Before vs Now" format
+	•	Internal Communication: 2 weeks prior
+	•	Enablement: Post-release webinar
+📚 SOP: Determining Slow Release Eligibility
+PMs must explicitly state in the PRD whether a feature qualifies for the Slow Release Channel.
+Types of Features Requiring Slow Release:(Examples based on historical releases)
+	1	Business-Critical CTA Renaming
+	◦	e.g., "Mark for Execution" → "Send for Signing"
+	◦	Common CTAs across the platform like "Awaiting Signature" to “Signing”
+	2	UI/UX changes that require users to unlearn old habits and learn new interactions.
+	◦	Relocation of CTAs —> Relocation of Assign BU to 3 dot menu in repository
+	◦	Navigation Menu Change
+	◦	Significant theming or visual level change → Moving from older to new design system.
+	3	Additional Steps in P0 Workflows/Areas
+	◦	New or changed steps in contract creation, approval flows, prepare for sign, etc
+	4	API/Integration Breaking Changes
+	◦	Endpoint rename, schema change, auth change
+	◦	Webhook key renames
+	◦	Changes to Slack, Salesforce, Hubspot, etc. integrations
+	1	Since Slack Changes requires users to restart the app
+	2	Some Salesforce updates require package reinstall in Salesforce
+	5	Global Config & Permissions Changes
+	◦	Changes to default roles, permissions and access controls update which may require some backfilling exercise.
+	6	Training/Documentation-Heavy Features
+	◦	e.g., Approvals V5, Salesforce Native Integration(Setup is documentation heavy)
+	7	Fundamental Feature Behavior Changes which requires major migration effort
+	◦	e.g., Change in Metadata behavior from Contract type to Global Metadata, Moving from Contract type to Workflow, etc.
+	8	Major Changes to P0 Workflows/Areas
+	◦	Summary Page layout change
+	◦	Navigation menu change
+	◦	New Editor Experience
+	9	Feature development work which are solely initiated by customer/group of customers  who are a part of slow-release channel 
+
+
+✉️ Operational Guidelines
+	•	Every JIRA ticket which is not a bug must have a slow-release field set to yes or no.
+	◦	Ownership to set this lies on the creator of the ticket.
+	•	Tickets missing this label value should not move to Ready for Testing.
+	•	For slow release features:
+	◦	Communication to customers must start 4 weeks before release.
+	◦	Help docs, in-app guidance, and changelogs must be ready.
+	◦	Internal enablement → 2 weeks before release(CS, Support, Implementation and Sales)
+	•	Features that are tagged yes for slow-release will be delivered to all customers(irrespective whether they have opted in for slow or fast release) as part of mid quarter release by default.
+🚀 Engineering Implementation (TBD)
+	•	Define how engineering will gate features in the release pipeline.
+👥 P0 Workflows/Areas Definition
+Workflows/Areas used daily by business users. Examples:
+	•	Contract Creation Flow: Template, TPP, Upload & Sign (Web + Integrations)
+	•	Repository: Search, filters, reports, views, access updates
+	•	Review Flow: Collection of Approvals, Request review, Version Comparison
+	•	Summary Page: CP update, add or manage recipients, activity log, metadata, all actions under “More actions” section, Key Information Cards and CTAs inside those cards(such as Party Info, Metadata)
+	•	Signing Flow: Prepare for signing, sign order, field placement
+	•	Navigation Menu → Primarily Change in CTAs or repositioning of actions
+	•	Access Control
+🤔 FAQ
+Q: Will opt-in customers still receive bug fixes?  Yes. Bug fixes will be shipped independently and can be cherry-picked.
+Q: What about urgent Rootly-related fixes?  If the fix qualifies as a slow-release type and cannot be feature flagged, it will follow the slow release process. Otherwise, it may be pushed earlier.
+Q: Can a Slow Release-tagged feature be delivered early?
+A: Yes—if it’s behind a feature flag. However, if the feature isn’t flaggable (e.g., platform-wide CTA renaming), early rollout is not feasible.
+
+🧪SOP Evaluation using AI
+Based on the above SOP ran last year Q3 items through AI and asked it to identify which feature should/should not be part of stable release → link
+
+
